@@ -1,5 +1,15 @@
+import { useLocation } from 'react-router-dom';
+
+import { PageTitle } from '~/components/common/PageTitle/PageTitle.styled';
+
 const EventRegistrationPage = () => {
-  return <div>EventRegistrationPage</div>;
+  const { state } = useLocation();
+
+  return (
+    <div>
+      <PageTitle>{`"${state?.eventTitle}"`} registration</PageTitle>
+    </div>
+  );
 };
 
 export default EventRegistrationPage;
