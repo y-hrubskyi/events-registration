@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
 
+import axios from '~/services/axios';
+
 import { PageTitle } from '~/components/common/PageTitle/PageTitle.styled';
 import { EventList } from '~/components/EventList/EventList';
-import { Loader } from '~/components/common/Loader/Loader.styled';
+import { Paginator } from '~/components/Paginator/Paginator';
+import { Loader } from '~/components/common/Loader/Loader';
 import { PlaceholderText } from '~/components/common/Placeholder/Placeholder.styled';
 
-import axios from '~/services/axios';
+const PER_PAGE = 12;
 
 const EventsBoardPage = () => {
   const [events, setEvents] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -18,16 +23,18 @@ const EventsBoardPage = () => {
         setError(false);
         setIsLoading(true);
 
-        const { data } = await axios.get('/events');
+        const searchParams = new URLSearchParams({ page, limit: PER_PAGE });
+        const { data } = await axios.get(`/events?${searchParams}`);
 
         setEvents(data.events);
+        setTotalCount(data.totalCount);
       } catch (error) {
         setError(error.message);
       } finally {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [page]);
 
   const loading = !error && isLoading;
   const hasError = !isLoading && error;
@@ -37,7 +44,16 @@ const EventsBoardPage = () => {
   return (
     <div>
       <PageTitle>Events</PageTitle>
-      {content && <EventList events={events} />}
+      {content && (
+        <>
+          <EventList events={events} />
+          <Paginator
+            totalCount={totalCount}
+            perPage={PER_PAGE}
+            setPage={setPage}
+          />
+        </>
+      )}
       {loading && <Loader />}
       {hasError && (
         <PlaceholderText>Oops.. Something went wrong</PlaceholderText>
