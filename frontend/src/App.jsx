@@ -1,9 +1,17 @@
+import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import SharedLayout from '~/components/SharedLayout/SharedLayout';
-import EventsBoardPage from '~/pages/EventsBoardPage/EventsBoardPage';
-import EventRegistrationPage from '~/pages/EventRegistrationPage/EventRegistrationPage';
-import EventParticipantsPage from '~/pages/EventParticipantsPage/EventParticipantsPage';
+import { SharedLayout } from '~/components/SharedLayout/SharedLayout';
+
+const EventsBoardPage = lazy(
+  () => import('~/pages/EventsBoardPage/EventsBoardPage')
+);
+const EventRegistrationPage = lazy(
+  () => import('~/pages/EventRegistrationPage/EventRegistrationPage')
+);
+const EventParticipantsPage = lazy(
+  () => import('~/pages/EventParticipantsPage/EventParticipantsPage')
+);
 
 export const App = () => {
   return (
