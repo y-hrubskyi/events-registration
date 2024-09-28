@@ -18,9 +18,9 @@ const EventsBoardPage = () => {
         setError(false);
         setIsLoading(true);
 
-        const { data } = await axios.get('/events?');
+        const { data } = await axios.get('/events');
 
-        setEvents(prevItems => [...prevItems, ...data.events]);
+        setEvents(data.events);
       } catch (error) {
         setError(error.message);
       } finally {
