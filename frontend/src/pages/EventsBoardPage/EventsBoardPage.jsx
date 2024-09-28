@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import axios from '~/services/axios';
 
@@ -13,9 +14,15 @@ const PER_PAGE = 12;
 const EventsBoardPage = () => {
   const [events, setEvents] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
-  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [params, setParams] = useSearchParams();
+  const page = params.get('page') ?? 1;
+
+  const setPage = value => {
+    params.set('page', value);
+    setParams(params);
+  };
 
   useEffect(() => {
     (async () => {
@@ -49,6 +56,8 @@ const EventsBoardPage = () => {
           <EventList events={events} />
           <Paginator
             totalCount={totalCount}
+            forcePage={page}
+            initialPage={page}
             perPage={PER_PAGE}
             setPage={setPage}
           />
