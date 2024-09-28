@@ -67,7 +67,7 @@ const EventsBoardPage = () => {
       {hasError && (
         <PlaceholderText>Oops.. Something went wrong</PlaceholderText>
       )}
-      {noData && <PlaceholderText>No Data</PlaceholderText>}
+      {noData && <PlaceholderText>No Events</PlaceholderText>}
     </div>
   );
 };
