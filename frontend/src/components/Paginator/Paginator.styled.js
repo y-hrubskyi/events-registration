@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledPaginateContainer = styled.div`
-  margin-top: ${p => p.theme.spacing(20)};
+  margin-top: ${p => p.theme.spacing(10)};
 
   .pagination {
     display: flex;
