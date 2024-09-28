@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { PageTitle } from '~/components/common/PageTitle/PageTitle.styled';
+import { EventList } from '~/components/EventList/EventList';
 import { Loader } from '~/components/common/Loader/Loader.styled';
 import { PlaceholderText } from '~/components/common/Placeholder/Placeholder.styled';
 
@@ -16,9 +18,9 @@ const EventsBoardPage = () => {
         setError(false);
         setIsLoading(true);
 
-        const { data } = await axios.get('/events');
+        const { data } = await axios.get('/events?');
 
-        setEvents(data.events);
+        setEvents(prevItems => [...prevItems, ...data.events]);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -31,7 +33,7 @@ const EventsBoardPage = () => {
 
   return (
     <div>
-      Events
+      <PageTitle>Events</PageTitle>
       {isLoading && <Loader />}
       {error && !isLoading && (
         <PlaceholderText>Oops.. Something went wrong</PlaceholderText>
@@ -39,7 +41,7 @@ const EventsBoardPage = () => {
       {isEmpty ? (
         <PlaceholderText>No Data</PlaceholderText>
       ) : (
-        <PlaceholderText>Done</PlaceholderText>
+        <EventList events={events} />
       )}
     </div>
   );
