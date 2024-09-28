@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 
+export const LoaderWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 export const Loader = styled.div`
-  width: 48px;
-  height: 48px;
-  margin-top: ${p => p.theme.spacing(16)};
+  width: 72px;
+  height: 72px;
+  margin-top: ${p => p.theme.spacing(20)};
   margin-left: auto;
   margin-right: auto;
 
