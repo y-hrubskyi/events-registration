@@ -1,21 +1,18 @@
 import { Suspense } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
+import * as SC from './SharedLayout.styled';
+
 export const SharedLayout = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 20
-      }}
-    >
+    <SC.Container>
       <Link to="/">Events Board</Link>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-      </Suspense>
-    </div>
+      <SC.Main>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </SC.Main>
+    </SC.Container>
   );
 };
