@@ -1,0 +1,9 @@
+{
+  "name": "events-registration",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
