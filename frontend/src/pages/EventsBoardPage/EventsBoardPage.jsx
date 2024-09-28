@@ -29,20 +29,20 @@ const EventsBoardPage = () => {
     })();
   }, []);
 
-  const isEmpty = !error && !isLoading && events.length === 0;
+  const loading = !error && isLoading;
+  const hasError = !isLoading && error;
+  const content = !error && events.length > 0;
+  const noData = !isLoading && !error && events.length === 0;
 
   return (
     <div>
       <PageTitle>Events</PageTitle>
-      {isLoading && <Loader />}
-      {error && !isLoading && (
+      {content && <EventList events={events} />}
+      {loading && <Loader />}
+      {hasError && (
         <PlaceholderText>Oops.. Something went wrong</PlaceholderText>
       )}
-      {isEmpty ? (
-        <PlaceholderText>No Data</PlaceholderText>
-      ) : (
-        <EventList events={events} />
-      )}
+      {noData && <PlaceholderText>No Data</PlaceholderText>}
     </div>
   );
 };
