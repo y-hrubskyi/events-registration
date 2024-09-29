@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from '~/services/axios';
 
 import { PageTitle } from '~/components/common/PageTitle/PageTitle.styled';
+import { EventsSortForm } from '~/components/EventsSortForm/EventsSortForm';
 import { EventList } from '~/components/EventList/EventList';
 import { Paginator } from '~/components/Paginator/Paginator';
 import { Loader } from '~/components/common/Loader/Loader';
@@ -53,6 +54,7 @@ const EventsBoardPage = () => {
       <PageTitle>Events</PageTitle>
       {content && (
         <>
+          <EventsSortForm />
           <EventList events={events} />
           <Paginator
             totalCount={totalCount}
