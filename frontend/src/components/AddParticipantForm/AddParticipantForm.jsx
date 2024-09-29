@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form';
 
+import * as SC from './AddParticipantForm.styled';
+
 export const AddParticipantForm = () => {
   const { register, handleSubmit } = useForm();
 
@@ -8,58 +10,64 @@ export const AddParticipantForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <div>
+    <SC.Form onSubmit={handleSubmit(onSubmit)}>
+      <SC.FormFieldsWrapper>
+        <SC.FormFieldWrapper>
           <label htmlFor="fullname">Full name</label>
           <input
             id="fullname"
             type="text"
             {...register('fullname', { required: true })}
           />
-        </div>
-        <div>
+        </SC.FormFieldWrapper>
+        <SC.FormFieldWrapper>
           <label htmlFor="email">Email</label>
           <input
             id="email"
             type="email"
             {...register('email', { required: true })}
           />
-        </div>
-        <div>
+        </SC.FormFieldWrapper>
+        <SC.FormFieldWrapper>
           <label htmlFor="dateOfBirth">Date of birth</label>
           <input
             id="dateOfBirth"
             type="date"
             {...register('dateOfBirth', { required: true })}
           />
-        </div>
-        <div>
+        </SC.FormFieldWrapper>
+        <SC.FormRadioWrapper>
           <p>Where did you hear about this event?</p>
-          <label htmlFor="socials">Social media</label>
-          <input
-            id="socials"
-            {...register('referralSource', { required: true })}
-            type="radio"
-            value="socials"
-          />
-          <label htmlFor="friends">Friends</label>
-          <input
-            id="friends"
-            {...register('referralSource', { required: true })}
-            type="radio"
-            value="friends"
-          />
-          <label htmlFor="myself">Found myself</label>
-          <input
-            id="myself"
-            {...register('referralSource', { required: true })}
-            type="radio"
-            value="myself"
-          />
-        </div>
-      </div>
+          <SC.FormRadioLabel htmlFor="socials">
+            <input
+              id="socials"
+              {...register('referralSource', { required: true })}
+              type="radio"
+              value="socials"
+            />
+            Social media
+          </SC.FormRadioLabel>
+          <SC.FormRadioLabel htmlFor="friends">
+            <input
+              id="friends"
+              {...register('referralSource', { required: true })}
+              type="radio"
+              value="friends"
+            />
+            Friends
+          </SC.FormRadioLabel>
+          <SC.FormRadioLabel htmlFor="myself">
+            <input
+              id="myself"
+              {...register('referralSource', { required: true })}
+              type="radio"
+              value="myself"
+            />
+            Found myself
+          </SC.FormRadioLabel>
+        </SC.FormRadioWrapper>
+      </SC.FormFieldsWrapper>
       <button type="submit">Registration</button>
-    </form>
+    </SC.Form>
   );
 };
