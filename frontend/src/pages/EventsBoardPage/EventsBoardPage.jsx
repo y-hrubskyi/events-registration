@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from '~/services/axios';
 
 import { PageTitle } from '~/components/common/PageTitle/PageTitle.styled';
+import { EventsSortForm } from '~/components/EventsSortForm/EventsSortForm';
 import { EventList } from '~/components/EventList/EventList';
 import { Paginator } from '~/components/Paginator/Paginator';
 import { Loader } from '~/components/common/Loader/Loader';
@@ -17,6 +18,7 @@ const EventsBoardPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [params, setParams] = useSearchParams();
+  const [sortConfig, setSortConfig] = useState(null);
   const page = params.get('page') ?? 1;
 
   const setPage = value => {
@@ -30,7 +32,11 @@ const EventsBoardPage = () => {
         setError(false);
         setIsLoading(true);
 
-        const searchParams = new URLSearchParams({ page, limit: PER_PAGE });
+        const searchParams = new URLSearchParams({
+          page,
+          limit: PER_PAGE,
+          ...sortConfig
+        });
         const { data } = await axios.get(`/events?${searchParams}`);
 
         setEvents(data.events);
@@ -41,7 +47,7 @@ const EventsBoardPage = () => {
         setIsLoading(false);
       }
     })();
-  }, [page]);
+  }, [page, sortConfig]);
 
   const loading = !error && isLoading;
   const hasError = !isLoading && error;
@@ -53,6 +59,7 @@ const EventsBoardPage = () => {
       <PageTitle>Events</PageTitle>
       {content && (
         <>
+          <EventsSortForm setSortConfig={setSortConfig} />
           <EventList events={events} />
           <Paginator
             totalCount={totalCount}
