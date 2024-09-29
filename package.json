@@ -10,7 +10,7 @@
     "_prettier": "prettier \"**/*.{js,jsx,json,md,css,html}\"",
     "lint:format": "npm run _prettier -- --check",
     "format": "npm run _prettier -- --write",
-    "prepare": "husky"
+    "prepare": "husky || true"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
