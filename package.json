@@ -9,13 +9,14 @@
   "scripts": {
     "_prettier": "prettier \"**/*.{js,jsx,json,md,css,html}\"",
     "lint:format": "npm run _prettier -- --check",
-    "lint": "lint-staged --cwd .",
-    "format": "npm run _prettier -- --write"
+    "format": "npm run _prettier -- --write",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "eslint": "^9.9.0",
     "globals": "^15.9.0",
+    "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3"
   }
