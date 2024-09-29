@@ -8,16 +8,20 @@
   ],
   "scripts": {
     "_prettier": "prettier \"**/*.{js,jsx,json,md,css,html}\"",
+    "git:hook:precommit": "lint-staged --cwd .",
     "lint:format": "npm run _prettier -- --check",
     "format": "npm run _prettier -- --write",
-    "prepare": "husky"
+    "ci:prepare": "simple-git-hooks"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "eslint": "^9.9.0",
     "globals": "^15.9.0",
-    "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "simple-git-hooks": "^2.11.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npm run git:hook:precommit"
   }
 }
