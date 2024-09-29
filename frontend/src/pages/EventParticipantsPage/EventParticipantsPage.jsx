@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import axios from '~/services/axios';
 
 import { PageTitle } from '~/components/common/PageTitle/PageTitle.styled';
+import { FIlterParticipants } from '~/components/FIlterParticipants/FIlterParticipants';
 import { ParticipantList } from '~/components/ParticipantList/ParticipantList';
 import { PlaceholderText } from '~/components/common/Placeholder/Placeholder.styled';
 import { Loader } from '~/components/common/Loader/Loader';
@@ -39,7 +40,12 @@ const EventParticipantsPage = () => {
   return (
     <div>
       <PageTitle>{`"${state?.eventTitle}"`} participants</PageTitle>
-      {content && <ParticipantList participants={participants} />}
+      {content && (
+        <>
+          <FIlterParticipants />
+          <ParticipantList participants={participants} />
+        </>
+      )}
       {loading && <Loader />}
       {hasError && (
         <PlaceholderText>Oops.. Something went wrong</PlaceholderText>
