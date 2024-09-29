@@ -1,8 +1,12 @@
 import { Event } from '#models/index.js';
 import { setPaginationOptions } from '#utils/index.js';
 
-export const get = async (page, limit) => {
+export const get = async (page, limit, sortConfig) => {
   const paginationOptions = setPaginationOptions(page, limit);
+
+  const [[sortKey, sortValue] = ['createdAt', 'desc']] =
+    Object.entries(sortConfig);
+  const sortParam = sortValue === 'desc' ? -1 : 1;
 
   const [
     {
@@ -13,6 +17,7 @@ export const get = async (page, limit) => {
     {
       $facet: {
         events: [
+          { $sort: { [sortKey]: sortParam } },
           { $skip: paginationOptions.skip },
           { $limit: paginationOptions.limit }
         ],
