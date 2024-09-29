@@ -1,9 +1,33 @@
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { addParticipantSchema } from '~/config/validation/addParticipantSchema';
+
+import { DatePicker } from '~/components/common/DatePicker/DatePicker';
+import { ValidationMessage } from '~/components/common/ValidationMessage/ValidationMessage';
 
 import * as SC from './AddParticipantForm.styled';
 
 export const AddParticipantForm = ({ registerParticipant }) => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, dirtyFields }
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(addParticipantSchema)
+  });
+
+  const isCorrectFullname = dirtyFields.fullname && !errors.fullname;
+  const hasErrorFullname = errors.fullname;
+  const isCorrectEmail = dirtyFields.email && !errors.email;
+  const hasErrorEmail = errors.email;
+  const isCorrectDateOfBirth = dirtyFields.dateOfBirth && !errors.dateOfBirth;
+  const hasErrorDateOfBirth = errors.dateOfBirth;
+  const isCorrectReferralSource =
+    dirtyFields.referralSource && !errors.referralSource;
+  const hasErrorReferralSource = errors.referralSource;
 
   return (
     <SC.Form onSubmit={handleSubmit(registerParticipant)}>
@@ -15,6 +39,12 @@ export const AddParticipantForm = ({ registerParticipant }) => {
             type="text"
             {...register('fullname', { required: true })}
           />
+          <ValidationMessage
+            isCorrect={isCorrectFullname}
+            correctMessage="Full name is correct"
+            hasError={hasErrorFullname}
+            errorMessage={errors.fullname?.message}
+          />
         </SC.FormFieldWrapper>
         <SC.FormFieldWrapper>
           <label htmlFor="email">Email</label>
@@ -23,13 +53,31 @@ export const AddParticipantForm = ({ registerParticipant }) => {
             type="email"
             {...register('email', { required: true })}
           />
+          <ValidationMessage
+            isCorrect={isCorrectEmail}
+            correctMessage="Email is correct"
+            hasError={hasErrorEmail}
+            errorMessage={errors.email?.message}
+          />
         </SC.FormFieldWrapper>
         <SC.FormFieldWrapper>
           <label htmlFor="dateOfBirth">Date of birth</label>
-          <input
-            id="dateOfBirth"
-            type="date"
-            {...register('dateOfBirth', { required: true })}
+          <Controller
+            name="dateOfBirth"
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                onChange={field.onChange}
+                selected={field.value}
+                id="dateOfBirth"
+              />
+            )}
+          />
+          <ValidationMessage
+            isCorrect={isCorrectDateOfBirth}
+            correctMessage="Date of birth is correct"
+            hasError={hasErrorDateOfBirth}
+            errorMessage={errors.dateOfBirth?.message}
           />
         </SC.FormFieldWrapper>
         <SC.FormRadioWrapper>
@@ -61,6 +109,12 @@ export const AddParticipantForm = ({ registerParticipant }) => {
             />
             Found myself
           </SC.FormRadioLabel>
+          <ValidationMessage
+            isCorrect={isCorrectReferralSource}
+            correctMessage="Referral source is chosen"
+            hasError={hasErrorReferralSource}
+            errorMessage={errors.referralSource?.message}
+          />
         </SC.FormRadioWrapper>
       </SC.FormFieldsWrapper>
       <button type="submit">Registration</button>

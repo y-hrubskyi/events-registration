@@ -2,7 +2,7 @@
 
 ## Description
 
-Web-based application for events registration. Base complexity level.
+Web-based application for events registration. Middle complexity level.
 
 ## Preview
 
@@ -71,6 +71,7 @@ frontend/
 |-- src/                  # Source code
 |   |-- assets/           # Static assets such as images, fonts, etc.
 |   |-- components/       # Reusable React components
+|   |-- config/           # Configuration files
 |   |-- pages/            # React components representing pages of the app
 |   |-- services/         # Services for handling API calls, etc.
 |   |-- styles/           # Global and theme styles
