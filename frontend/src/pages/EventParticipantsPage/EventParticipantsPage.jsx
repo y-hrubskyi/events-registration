@@ -15,6 +15,7 @@ const EventParticipantsPage = () => {
   const [participants, setParticipants] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [filter, setFilter] = useState({ fullname: '', email: '' });
 
   useEffect(() => {
     (async () => {
@@ -32,18 +33,33 @@ const EventParticipantsPage = () => {
     })();
   }, [eventId]);
 
+  const filterParticipants = (participants, filter) => {
+    const normalizedFullname = filter.fullname.toLowerCase();
+    const normalizedEmail = filter.email.toLowerCase();
+
+    return participants
+      .filter(
+        ({ fullname, email }) =>
+          fullname.toLowerCase().includes(normalizedFullname) &&
+          email.toLowerCase().includes(normalizedEmail)
+      )
+      .sort((a, b) => a.fullname.localeCompare(b.fullname));
+  };
+
+  const visibleParticipants = filterParticipants(participants, filter);
+
   const loading = !error && isLoading;
   const hasError = !isLoading && error;
   const content = !error && participants.length > 0;
-  const noData = !isLoading && !error && participants.length === 0;
+  const noData = !isLoading && !error && visibleParticipants.length === 0;
 
   return (
     <div>
       <PageTitle>{`"${state?.eventTitle}"`} participants</PageTitle>
       {content && (
         <>
-          <FIlterParticipants />
-          <ParticipantList participants={participants} />
+          <FIlterParticipants setFilter={setFilter} />
+          <ParticipantList participants={visibleParticipants} />
         </>
       )}
       {loading && <Loader />}
