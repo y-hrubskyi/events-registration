@@ -2,15 +2,11 @@ import { useForm } from 'react-hook-form';
 
 import * as SC from './AddParticipantForm.styled';
 
-export const AddParticipantForm = () => {
+export const AddParticipantForm = ({ registerParticipant }) => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = data => {
-    console.log(data);
-  };
-
   return (
-    <SC.Form onSubmit={handleSubmit(onSubmit)}>
+    <SC.Form onSubmit={handleSubmit(registerParticipant)}>
       <SC.FormFieldsWrapper>
         <SC.FormFieldWrapper>
           <label htmlFor="fullname">Full name</label>
