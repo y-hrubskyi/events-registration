@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import { App } from './App.jsx';
-import { GlobalStyle } from '~/styles/GlobalStyle.js';
 import { theme } from '~/styles/theme.js';
+import { GlobalStyle } from '~/styles/GlobalStyle.js';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

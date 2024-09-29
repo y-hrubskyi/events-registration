@@ -27,7 +27,6 @@ export const App = () => {
           path="events/:eventId/participants"
           element={<EventParticipantsPage />}
         />
-
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
