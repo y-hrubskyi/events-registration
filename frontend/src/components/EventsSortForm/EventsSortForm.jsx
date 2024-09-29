@@ -8,12 +8,15 @@ const SortTypes = {
   DESC: 'desc'
 };
 
-export const EventsSortForm = () => {
+export const EventsSortForm = ({ setSortConfig }) => {
   const [sortType, setSortType] = useState(SortTypes.ASC);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = data => {
-    console.log(data);
+    const sortConfig = {
+      [data.sortField]: sortType
+    };
+    setSortConfig(sortConfig);
 
     setSortType(prevState =>
       prevState === SortTypes.ASC ? SortTypes.DESC : SortTypes.ASC
