@@ -1,9 +1,11 @@
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
+
+import { DatePicker } from '~/components/common/DatePicker/DatePicker';
 
 import * as SC from './AddParticipantForm.styled';
 
 export const AddParticipantForm = ({ registerParticipant }) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   return (
     <SC.Form onSubmit={handleSubmit(registerParticipant)}>
@@ -26,10 +28,16 @@ export const AddParticipantForm = ({ registerParticipant }) => {
         </SC.FormFieldWrapper>
         <SC.FormFieldWrapper>
           <label htmlFor="dateOfBirth">Date of birth</label>
-          <input
-            id="dateOfBirth"
-            type="date"
-            {...register('dateOfBirth', { required: true })}
+          <Controller
+            name="dateOfBirth"
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                onChange={field.onChange}
+                selected={field.value}
+                id="dateOfBirth"
+              />
+            )}
           />
         </SC.FormFieldWrapper>
         <SC.FormRadioWrapper>
