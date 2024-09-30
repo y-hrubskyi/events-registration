@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import axios from '~/services/axios';
 
-import { PageTitle } from '~/components/common/PageTitle/PageTitle.styled';
+import { BasePageTitle } from '~/components/common/PageTitle/PageTitle.styled';
 import { EventsSortForm } from '~/components/EventsSortForm/EventsSortForm';
 import { EventList } from '~/components/EventList/EventList';
 import { Paginator } from '~/components/Paginator/Paginator';
@@ -56,7 +56,7 @@ const EventsBoardPage = () => {
 
   return (
     <div>
-      <PageTitle>Events</PageTitle>
+      <BasePageTitle>Events</BasePageTitle>
       {content && (
         <>
           <EventsSortForm setSortConfig={setSortConfig} />

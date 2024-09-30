@@ -75,6 +75,7 @@ frontend/
 |   |-- pages/            # React components representing pages of the app
 |   |-- services/         # Services for handling API calls, etc.
 |   |-- styles/           # Global and theme styles
+|   |-- utils/            # General utility functions and helper modules
 |   |-- App.jsx           # Main App component
 |   |-- main.jsx          # Entry point for rendering the React app
 |-- package.json          # Project configuration and dependencies

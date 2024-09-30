@@ -1,9 +1,10 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { AddParticipantForm } from '~/components/AddParticipantForm/AddParticipantForm';
 
 import axios from '~/services/axios';
 
 import { PageTitle } from '~/components/common/PageTitle/PageTitle.styled';
+import { EventInfo } from '~/components/common/EventInfo/EventInfo.styled';
+import { AddParticipantForm } from '~/components/AddParticipantForm/AddParticipantForm';
 
 const EventRegistrationPage = () => {
   const { eventId } = useParams();
@@ -16,7 +17,11 @@ const EventRegistrationPage = () => {
 
       await axios.post('/participants', newParticipant);
       navigate(`/events/${eventId}/participants`, {
-        state: { eventTitle: state?.eventTitle }
+        state: {
+          eventTitle: state?.eventTitle,
+          organizer: state?.organizer,
+          date: state?.date
+        }
       });
     } catch (error) {
       console.error(error.message);
@@ -26,6 +31,10 @@ const EventRegistrationPage = () => {
   return (
     <div>
       <PageTitle>{`"${state?.eventTitle}"`} registration</PageTitle>
+      <EventInfo>
+        <p>Organizer: {state?.organizer}</p>
+        <p>Date: {state?.date}</p>
+      </EventInfo>
       <AddParticipantForm registerParticipant={registerParticipantForEvent} />
     </div>
   );

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const EventCard = styled.li`
   display: flex;
@@ -12,13 +11,7 @@ export const EventCard = styled.li`
   border-radius: ${p => p.theme.radii.card};
 `;
 
-export const EventTitle = styled.h3``;
-
-export const EventDescription = styled.p``;
-
 export const EventActionLinksWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
-export const EventActionLink = styled(Link)``;

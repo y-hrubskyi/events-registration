@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import axios from '~/services/axios';
+import { filterParticipants } from '~/utils/filterParticipants';
 
 import { PageTitle } from '~/components/common/PageTitle/PageTitle.styled';
+import { EventInfo } from '~/components/common/EventInfo/EventInfo.styled';
 import { FIlterParticipants } from '~/components/FIlterParticipants/FIlterParticipants';
 import { ParticipantList } from '~/components/ParticipantList/ParticipantList';
 import { PlaceholderText } from '~/components/common/Placeholder/Placeholder.styled';
@@ -33,19 +35,6 @@ const EventParticipantsPage = () => {
     })();
   }, [eventId]);
 
-  const filterParticipants = (participants, filter) => {
-    const normalizedFullname = filter.fullname.toLowerCase();
-    const normalizedEmail = filter.email.toLowerCase();
-
-    return participants
-      .filter(
-        ({ fullname, email }) =>
-          fullname.toLowerCase().includes(normalizedFullname) &&
-          email.toLowerCase().includes(normalizedEmail)
-      )
-      .sort((a, b) => a.fullname.localeCompare(b.fullname));
-  };
-
   const visibleParticipants = filterParticipants(participants, filter);
 
   const loading = !error && isLoading;
@@ -56,6 +45,10 @@ const EventParticipantsPage = () => {
   return (
     <div>
       <PageTitle>{`"${state?.eventTitle}"`} participants</PageTitle>
+      <EventInfo>
+        <p>Organizer: {state?.organizer}</p>
+        <p>Date: {state?.date}</p>
+      </EventInfo>
       {content && (
         <>
           <FIlterParticipants setFilter={setFilter} />

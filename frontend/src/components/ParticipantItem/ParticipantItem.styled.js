@@ -10,7 +10,3 @@ export const ParticipantCard = styled.li`
   border: 1px solid ${p => p.theme.colors.black};
   border-radius: ${p => p.theme.radii.card};
 `;
-
-export const ParticipantFullName = styled.h3``;
-
-export const ParticipantEmail = styled.p``;
