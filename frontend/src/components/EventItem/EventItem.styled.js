@@ -16,6 +16,10 @@ export const EventTitle = styled.h3``;
 
 export const EventDescription = styled.p``;
 
+export const EventInfoWrapper = styled.div``;
+
+export const EventInfo = styled.p``;
+
 export const EventActionLinksWrapper = styled.div`
   display: flex;
   justify-content: space-between;
