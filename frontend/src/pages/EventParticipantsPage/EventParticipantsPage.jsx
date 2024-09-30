@@ -4,12 +4,11 @@ import { useLocation, useParams } from 'react-router-dom';
 import axios from '~/services/axios';
 
 import { PageTitle } from '~/components/common/PageTitle/PageTitle.styled';
+import { EventInfo } from '~/components/common/EventInfo/EventInfo.styled';
 import { FIlterParticipants } from '~/components/FIlterParticipants/FIlterParticipants';
 import { ParticipantList } from '~/components/ParticipantList/ParticipantList';
 import { PlaceholderText } from '~/components/common/Placeholder/Placeholder.styled';
 import { Loader } from '~/components/common/Loader/Loader';
-
-import * as SC from './EventParticipantsPage.styled';
 
 const EventParticipantsPage = () => {
   const { eventId } = useParams();
@@ -58,10 +57,10 @@ const EventParticipantsPage = () => {
   return (
     <div>
       <PageTitle>{`"$state?.eventTitle}"`} participants</PageTitle>
-      <SC.EventInfo>
+      <EventInfo>
         <p>Organizer: {state.organizer}</p>
         <p>Date: {state.date}</p>
-      </SC.EventInfo>
+      </EventInfo>
       {content && (
         <>
           <FIlterParticipants setFilter={setFilter} />
