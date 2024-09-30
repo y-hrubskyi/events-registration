@@ -26,7 +26,7 @@ const EventRegistrationPage = () => {
 
   return (
     <div>
-      <PageTitle>{`"${state?.eventTitle}"`} registration</PageTitle>
+      <PageTitle>{`"${state.eventTitle}"`} registration</PageTitle>
       <EventInfo>
         <p>Organizer: {state.organizer}</p>
         <p>Date: {state.date}</p>
