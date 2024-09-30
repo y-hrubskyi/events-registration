@@ -9,6 +9,8 @@ import { ParticipantList } from '~/components/ParticipantList/ParticipantList';
 import { PlaceholderText } from '~/components/common/Placeholder/Placeholder.styled';
 import { Loader } from '~/components/common/Loader/Loader';
 
+import * as SC from './EventParticipantsPage.styled';
+
 const EventParticipantsPage = () => {
   const { eventId } = useParams();
   const { state } = useLocation();
@@ -55,7 +57,11 @@ const EventParticipantsPage = () => {
 
   return (
     <div>
-      <PageTitle>{`"${state?.eventTitle}"`} participants</PageTitle>
+      <PageTitle>{`"$state?.eventTitle}"`} participants</PageTitle>
+      <SC.EventInfo>
+        <p>Organizer: {state.organizer}</p>
+        <p>Date: {state.date}</p>
+      </SC.EventInfo>
       {content && (
         <>
           <FIlterParticipants setFilter={setFilter} />

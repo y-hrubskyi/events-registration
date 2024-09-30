@@ -2,28 +2,35 @@ import { formatDate } from '~/utils/formatDate';
 
 import * as SC from './EventItem.styled';
 
-export const EventItem = ({ event }) => {
-  const formattedDate = formatDate(new Date(event.date));
+export const EventItem = ({
+  event: { _id, title, organizer, date, description }
+}) => {
+  const formattedDate = formatDate(new Date(date));
+  const eventInfo = {
+    eventTitle: title,
+    organizer,
+    date: formattedDate
+  };
 
   return (
     <SC.EventCard>
-      <SC.EventTitle>{event.title}</SC.EventTitle>
+      <SC.EventTitle>{title}</SC.EventTitle>
       <SC.EventInfoWrapper>
-        <SC.EventInfo>{event.organizer}</SC.EventInfo>
+        <SC.EventInfo>{organizer}</SC.EventInfo>
         <SC.EventInfo>{formattedDate}</SC.EventInfo>
       </SC.EventInfoWrapper>
-      <SC.EventDescription>{event.description}</SC.EventDescription>
+      <SC.EventDescription>{description}</SC.EventDescription>
 
       <SC.EventActionLinksWrapper>
         <SC.EventActionLink
-          to={`/events/${event._id}/registration`}
           state={{ eventTitle: event.title }}
+          to={`/events/${_id}/registration`}
         >
           Register
         </SC.EventActionLink>
         <SC.EventActionLink
-          to={`/events/${event._id}/participants`}
-          state={{ eventTitle: event.title }}
+          to={`/events/${_id}/participants`}
+          state={eventInfo}
         >
           View
         </SC.EventActionLink>
