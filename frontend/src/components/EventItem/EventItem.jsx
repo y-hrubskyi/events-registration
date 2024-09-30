@@ -23,8 +23,8 @@ export const EventItem = ({
 
       <SC.EventActionLinksWrapper>
         <SC.EventActionLink
-          state={{ eventTitle: event.title }}
           to={`/events/${_id}/registration`}
+          state={eventInfo}
         >
           Register
         </SC.EventActionLink>
