@@ -4,7 +4,6 @@ import 'modern-normalize';
 import ManropeRegularWOFF2 from '~/assets/fonts/Manrope-Regular.woff2';
 import ManropeMediumWOFF2 from '~/assets/fonts/Manrope-Medium.woff2';
 import ManropeSemiBoldWOFF2 from '~/assets/fonts/Manrope-SemiBold.woff2';
-import MontserratRegularWOFF2 from '~/assets/fonts/Montserrat-Regular.woff2';
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -28,14 +27,6 @@ export const GlobalStyle = createGlobalStyle`
     src: local("Manrope"),
       url(${ManropeSemiBoldWOFF2}) format("woff2");
     font-weight: 600;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "Montserrat";
-    src: local("Montserrat"),
-      url(${MontserratRegularWOFF2}) format("woff2");
-    font-weight: normal;
     font-style: normal;
   }
 

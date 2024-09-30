@@ -17,7 +17,11 @@ const EventRegistrationPage = () => {
 
       await axios.post('/participants', newParticipant);
       navigate(`/events/${eventId}/participants`, {
-        state: { eventTitle: state?.eventTitle }
+        state: {
+          eventTitle: state?.eventTitle,
+          organizer: state?.organizer,
+          date: state?.date
+        }
       });
     } catch (error) {
       console.error(error.message);
@@ -26,10 +30,10 @@ const EventRegistrationPage = () => {
 
   return (
     <div>
-      <PageTitle>{`"${state.eventTitle}"`} registration</PageTitle>
+      <PageTitle>{`"${state?.eventTitle}"`} registration</PageTitle>
       <EventInfo>
-        <p>Organizer: {state.organizer}</p>
-        <p>Date: {state.date}</p>
+        <p>Organizer: {state?.organizer}</p>
+        <p>Date: {state?.date}</p>
       </EventInfo>
       <AddParticipantForm registerParticipant={registerParticipantForEvent} />
     </div>
