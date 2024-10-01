@@ -105,12 +105,12 @@ frontend/
 
 1. Create and fill all .env files. These files are:
 
-- backend/.env
+   - backend/.env
 
-You should use .env.example files as a reference.
+   You should use .env.example files as a reference.
 
-1. Install dependencies: `npm install`.
+2. Install dependencies: `npm install`.
 
-2. Run backend: `npm run dev -w backend`
+3. Run backend: `npm run dev -w backend`
 
-3. Run frontend: `npm run dev -w frontend`
+4. Run frontend: `npm run dev -w frontend`
